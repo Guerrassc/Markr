@@ -1,0 +1,271 @@
+[
+ {
+  "id": "essay",
+  "brief": "HIST201 Essay. Write a 1500-word essay (+/-10%) on one cause of the First World War. Submit as PDF via Moodle by Friday 14 November, 23:59. Use Harvard referencing with at least 6 academic sources. Include a title page with your student ID. Late work loses 10% per day.",
+  "gt": [
+   [
+    "1500",
+    "word"
+   ],
+   [
+    "pdf"
+   ],
+   [
+    "14 november"
+   ],
+   [
+    "harvard"
+   ],
+   [
+    "6",
+    "source"
+   ],
+   [
+    "title page"
+   ],
+   [
+    "late",
+    "10%"
+   ]
+  ]
+ },
+ {
+  "id": "lab",
+  "brief": "Lab report: Titration. Groups of 2. Report max 6 pages excluding appendix. Required sections: Aim, Method, Results table, Error analysis, Conclusion. Submit one file per group named LAB3_surname1_surname2.pdf. Deadline Monday 24 November, 12:00. Results must include units and uncertainties.",
+  "gt": [
+   [
+    "group",
+    "2"
+   ],
+   [
+    "6",
+    "page"
+   ],
+   [
+    "error analysis"
+   ],
+   [
+    "lab3"
+   ],
+   [
+    "24 november"
+   ],
+   [
+    "unit"
+   ],
+   [
+    "uncertaint"
+   ]
+  ]
+ },
+ {
+  "id": "haskell",
+  "brief": "Assignment 2 (Haskell). Implement the functions in Assignment2.hs. Do not change the function signatures. No external packages besides base. Submit Assignment2.hs only, no zip. Deadline: 1 December 2026, 23:59. Add a short comment above each function explaining your approach. Marks: 60% correctness (hidden tests), 20% style, 20% comments.",
+  "gt": [
+   [
+    "signature"
+   ],
+   [
+    "base"
+   ],
+   [
+    "assignment2.hs"
+   ],
+   [
+    "1 december"
+   ],
+   [
+    "comment"
+   ],
+   [
+    "60%",
+    "correct"
+   ]
+  ]
+ },
+ {
+  "id": "presentation",
+  "brief": "Group presentation: 10 minutes plus 5 minutes of questions. Every member must speak. Slides: maximum 12, uploaded as PDF the day before. Topic chosen from the Moodle list and registered by 7 November. Marking: content 40%, delivery 30%, slides 20%, teamwork 10%.",
+  "gt": [
+   [
+    "10 minutes"
+   ],
+   [
+    "every member"
+   ],
+   [
+    "12",
+    "slide"
+   ],
+   [
+    "pdf"
+   ],
+   [
+    "7 november"
+   ],
+   [
+    "40%",
+    "content"
+   ]
+  ]
+ },
+ {
+  "id": "reflection",
+  "brief": "Individual reflection. Answer each of the three questions in about 75 words. Submit on Moodle as plain text, no attachments. Be specific: point to commits or files. Deadline Sunday 13 December. Any AI-generated text must be declared.",
+  "gt": [
+   [
+    "75",
+    "word"
+   ],
+   [
+    "plain text"
+   ],
+   [
+    "commit"
+   ],
+   [
+    "13 december"
+   ],
+   [
+    "declare"
+   ]
+  ]
+ },
+ {
+  "id": "french",
+  "brief": "Travail de groupe - Marketing. Rapport de 8 pages maximum (annexes exclues), police Arial 11, interligne 1,5. Remise sur Moodle avant le vendredi 21 novembre a 17h. Chaque groupe doit citer au moins 5 sources au format APA. Un rapport hors delai ne sera pas corrige.",
+  "gt": [
+   [
+    "8 pages"
+   ],
+   [
+    "arial"
+   ],
+   [
+    "21 novembre"
+   ],
+   [
+    "5",
+    "source"
+   ],
+   [
+    "apa"
+   ],
+   [
+    "delai"
+   ]
+  ]
+ },
+ {
+  "id": "rubric",
+  "brief": "Rubric - Data analysis project. Data cleaning (20): missing values handled and documented. Visualisation (20): at least 3 charts, each with labelled axes. Interpretation (30): conclusions supported by the data. Code quality (20): runs end to end from the README. Presentation (10): max 8 pages. Submit notebook and PDF by 5 December.",
+  "gt": [
+   [
+    "data cleaning",
+    "20"
+   ],
+   [
+    "3",
+    "chart"
+   ],
+   [
+    "label",
+    "axes"
+   ],
+   [
+    "readme"
+   ],
+   [
+    "8 page"
+   ],
+   [
+    "5 december"
+   ],
+   [
+    "notebook"
+   ]
+  ]
+ },
+ {
+  "id": "email",
+  "brief": "Hi all, quick reminder about the poster for the research methods module. A1 portrait, one per pair, bring it printed to the session on 19 November. Put your names and student IDs at the bottom. No more than 300 words of text. A QR code to your data is a bonus. Please don't email it to me, I won't accept digital copies.",
+  "gt": [
+   [
+    "a1"
+   ],
+   [
+    "pair"
+   ],
+   [
+    "19 november"
+   ],
+   [
+    "student id"
+   ],
+   [
+    "300",
+    "word"
+   ],
+   [
+    "digital"
+   ],
+   [
+    "qr"
+   ]
+  ]
+ },
+ {
+  "id": "problemset",
+  "brief": "Problem Set 4. Solve all 6 problems; show your working, answers without working get zero. Handwritten scans are accepted if legible, otherwise use LaTeX. One PDF. Due Tuesday 11 November before the lecture (10:00). You may discuss with classmates but must write your solutions alone.",
+  "gt": [
+   [
+    "6",
+    "problem"
+   ],
+   [
+    "working"
+   ],
+   [
+    "latex"
+   ],
+   [
+    "one",
+    "pdf"
+   ],
+   [
+    "11 november"
+   ],
+   [
+    "alone"
+   ]
+  ]
+ },
+ {
+  "id": "thesis",
+  "brief": "Thesis proposal (2 pages). Include research question, motivation, method, timeline and 5 references. Font 11pt, margins 2.5 cm. Name your supervisor candidate. Submit by 28 November via the department form, not Moodle. Proposals above 2 pages are not reviewed.",
+  "gt": [
+   [
+    "2 page"
+   ],
+   [
+    "research question"
+   ],
+   [
+    "5",
+    "reference"
+   ],
+   [
+    "11"
+   ],
+   [
+    "2.5 cm"
+   ],
+   [
+    "28 november"
+   ],
+   [
+    "department"
+   ]
+  ]
+ }
+]
