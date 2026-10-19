@@ -14,7 +14,7 @@ def chat(provider, model, system, user, timeout=120):
         return ("".join(b.get("text", "") for b in d["content"]),
                 d["usage"]["input_tokens"], d["usage"]["output_tokens"], time.time() - t0)
     if provider == "openai":
-        r = requests.post("https://api.openai.com/v1/chat/completions",
+        r = requests.post(os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1") + "/chat/completions",
             headers={"Authorization": "Bearer " + os.environ["OPENAI_API_KEY"]},
             json={"model": model, "messages": [{"role": "system", "content": system},
                                                {"role": "user", "content": user}]}, timeout=timeout)
@@ -22,13 +22,19 @@ def chat(provider, model, system, user, timeout=120):
         return (d["choices"][0]["message"]["content"],
                 d["usage"]["prompt_tokens"], d["usage"]["completion_tokens"], time.time() - t0)
     if provider == "gemini":
-        r = requests.post(
-            f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent",
-            headers={"x-goog-api-key": os.environ["GEMINI_API_KEY"],
-                     "content-type": "application/json"},
-            json={"systemInstruction": {"parts": [{"text": system}]},
-                  "contents": [{"role": "user", "parts": [{"text": user}]}],
-                  "generationConfig": {"maxOutputTokens": 4000}}, timeout=timeout)
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+        hdr = {"x-goog-api-key": os.environ["GEMINI_API_KEY"], "content-type": "application/json"}
+        body = {"systemInstruction": {"parts": [{"text": system}]},
+                "contents": [{"role": "user", "parts": [{"text": user}]}],
+                "generationConfig": {"maxOutputTokens": 4000}}
+        for attempt in range(6):
+            t0 = time.time()
+            r = requests.post(url, headers=hdr, json=body, timeout=timeout)
+            if r.status_code in (429, 503) and attempt < 5:
+                time.sleep(min(60, 5 * 2 ** attempt))
+                continue
+            break
+        time.sleep(8)
         r.raise_for_status(); d = r.json()
         text = "".join(p.get("text", "") for p in d["candidates"][0]["content"]["parts"])
         u = d.get("usageMetadata", {})
