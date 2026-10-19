@@ -1,0 +1,318 @@
+{
+ "summary": {
+  "rules": {
+   "model": "regex",
+   "cases": 10,
+   "mean_recall": 0.503,
+   "mean_items": 3.7,
+   "input_tokens": 0,
+   "output_tokens": 0,
+   "median_latency_s": 0.0,
+   "worst_latency_s": 0.0
+  },
+  "small": {
+   "model": "gemini-3.5-flash-lite",
+   "cases": 3,
+   "mean_recall": 1.0,
+   "mean_items": 10.7,
+   "input_tokens": 591,
+   "output_tokens": 430,
+   "median_latency_s": 31.49,
+   "worst_latency_s": 186.34
+  }
+ },
+ "detail": {
+  "rules": [
+   {
+    "case": "essay",
+    "recall": 0.29,
+    "n_items": 2,
+    "missed": [
+     [
+      "pdf"
+     ],
+     [
+      "harvard"
+     ],
+     [
+      "6",
+      "source"
+     ],
+     [
+      "title page"
+     ],
+     [
+      "late",
+      "10%"
+     ]
+    ],
+    "items": [
+     "14 November",
+     "1500-word essay (+/-10%) on one cause of the First World War"
+    ]
+   },
+   {
+    "case": "lab",
+    "recall": 0.57,
+    "n_items": 3,
+    "missed": [
+     [
+      "group",
+      "2"
+     ],
+     [
+      "error analysis"
+     ],
+     [
+      "lab3"
+     ]
+    ],
+    "items": [
+     "24 November",
+     "max 6 pages excluding appendix",
+     "must include units and uncertainties"
+    ]
+   },
+   {
+    "case": "haskell",
+    "recall": 0.5,
+    "n_items": 4,
+    "missed": [
+     [
+      "assignment2.hs"
+     ],
+     [
+      "comment"
+     ],
+     [
+      "60%",
+      "correct"
+     ]
+    ],
+    "items": [
+     "1 December 2026",
+     "Do not change the function signatures",
+     "No external packages besides base",
+     "only, no zip"
+    ]
+   },
+   {
+    "case": "presentation",
+    "recall": 0.33,
+    "n_items": 3,
+    "missed": [
+     [
+      "every member"
+     ],
+     [
+      "12",
+      "slide"
+     ],
+     [
+      "pdf"
+     ],
+     [
+      "40%",
+      "content"
+     ]
+    ],
+    "items": [
+     "7 November",
+     "10 minutes plus 5 minutes of questions",
+     "must speak"
+    ]
+   },
+   {
+    "case": "reflection",
+    "recall": 0.6,
+    "n_items": 4,
+    "missed": [
+     [
+      "plain text"
+     ],
+     [
+      "commit"
+     ]
+    ],
+    "items": [
+     "13 December",
+     "about 75 words",
+     "no attachments",
+     "must be declared"
+    ]
+   },
+   {
+    "case": "french",
+    "recall": 0.67,
+    "n_items": 3,
+    "missed": [
+     [
+      "arial"
+     ],
+     [
+      "delai"
+     ]
+    ],
+    "items": [
+     "21 novembre",
+     "8 pages maximum (annexes exclues)",
+     "5 sources au format APA"
+    ]
+   },
+   {
+    "case": "rubric",
+    "recall": 0.43,
+    "n_items": 3,
+    "missed": [
+     [
+      "data cleaning",
+      "20"
+     ],
+     [
+      "label",
+      "axes"
+     ],
+     [
+      "readme"
+     ],
+     [
+      "notebook"
+     ]
+    ],
+    "items": [
+     "5 December",
+     "at least 3 charts",
+     "max 8 pages"
+    ]
+   },
+   {
+    "case": "email",
+    "recall": 0.43,
+    "n_items": 4,
+    "missed": [
+     [
+      "a1"
+     ],
+     [
+      "pair"
+     ],
+     [
+      "student id"
+     ],
+     [
+      "qr"
+     ]
+    ],
+    "items": [
+     "19 November",
+     "300 words of text",
+     "No more than 300 words of text",
+     "don't email it to me, I won't accept digital copies"
+    ]
+   },
+   {
+    "case": "problemset",
+    "recall": 0.5,
+    "n_items": 3,
+    "missed": [
+     [
+      "working"
+     ],
+     [
+      "latex"
+     ],
+     [
+      "one",
+      "pdf"
+     ]
+    ],
+    "items": [
+     "11 November",
+     "6 problems",
+     "must write your solutions alone"
+    ]
+   },
+   {
+    "case": "thesis",
+    "recall": 0.71,
+    "n_items": 8,
+    "missed": [
+     [
+      "research question"
+     ],
+     [
+      "department"
+     ]
+    ],
+    "items": [
+     "28 November",
+     "2 pages)",
+     "5 references",
+     "11pt",
+     "2.5 cm",
+     "2 pages are not reviewed",
+     "not Moodle",
+     "not reviewed"
+    ]
+   }
+  ],
+  "small": [
+   {
+    "case": "essay",
+    "recall": 1.0,
+    "n_items": 9,
+    "missed": [],
+    "items": [
+     "Write an essay on one cause of the First World War.",
+     "The essay length must be 1500-word (+/-10%).",
+     "Submit the essay as a PDF file.",
+     "Submit via Moodle.",
+     "Submit by Friday 14 November, 23:59.",
+     "Use Harvard referencing.",
+     "Use at least 6 academic sources.",
+     "Include a title page with your student ID.",
+     "Late work loses 10% per day."
+    ]
+   },
+   {
+    "case": "lab",
+    "recall": 1.0,
+    "n_items": 13,
+    "missed": [],
+    "items": [
+     "Complete the assignment as a group of 2 students.",
+     "Write a lab report on the topic of Titration.",
+     "Keep the report length to a maximum of 6 pages excluding the appendix.",
+     "Include an Aim section in the report.",
+     "Include a Method section in the report.",
+     "Include a Results table section in the report.",
+     "Include an Error analysis section in the report.",
+     "Include a Conclusion section in the report.",
+     "Include units in the results.",
+     "Include uncertainties in the results.",
+     "Submit one file per group.",
+     "Name the submission file LAB3_surname1_surname2.pdf.",
+     "Submit the report by Monday 24 November, 12:00."
+    ]
+   },
+   {
+    "case": "haskell",
+    "recall": 1.0,
+    "n_items": 10,
+    "missed": [],
+    "items": [
+     "Implement the functions in Assignment2.hs.",
+     "Do not change the function signatures.",
+     "Use no external packages besides base.",
+     "Submit Assignment2.hs only.",
+     "Do not submit a zip file.",
+     "Submit by 1 December 2026, 23:59.",
+     "Add a short comment above each function explaining your approach.",
+     "Achieve correctness based on hidden tests worth 60% of the marks.",
+     "Achieve good style worth 20% of the marks.",
+     "Provide quality comments worth 20% of the marks."
+    ]
+   }
+  ]
+ }
+}
