@@ -1,107 +1,72 @@
 \PassOptionsToPackage{hyphens}{url}
-\documentclass[10pt]{article}
-
+\documentclass[8pt]{article}
 \usepackage[english]{babel}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage{textcomp}
-\usepackage[letterpaper,top=2.2cm,bottom=1.7cm,left=1.6cm,right=1.6cm,marginparwidth=1.75cm]{geometry}
-\usepackage{amssymb}
-\usepackage{booktabs}
-\usepackage{array}
-\usepackage{graphicx}
-\usepackage{xcolor}
-\usepackage[colorlinks=true, allcolors=blue]{hyperref}
-\usepackage{enumitem}
-\usepackage{float}
-\usepackage{fancyhdr}
-\usepackage{lastpage}
-\usepackage{titlesec}
-
+\usepackage[letterpaper,top=1.15cm,bottom=1.1cm,left=1.15cm,right=1.15cm]{geometry}
+\usepackage{amssymb,booktabs,array,graphicx,xcolor,hyperref,enumitem,fancyhdr,lastpage,titlesec}
+\hypersetup{colorlinks=true,allcolors=blue}
 \setlist{nosep,leftmargin=1.1em}
 \titleformat{\section}{\normalsize\bfseries}{\thesection.}{0.4em}{}
-\titlespacing*{\section}{0pt}{4pt}{1pt}
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{2pt}
-
-% Red text = fill in / verify before submitting
-\newcommand{\todo}[1]{\textcolor{red}{[#1]}}
-
-\pagestyle{fancy}
-\fancyhf{}
-
-\setlength{\headheight}{0.8cm}
-\setlength{\footskip}{1.1cm}
-
-\newcommand{\groupnames}{\begin{tabular}[t]{@{}l@{}}
-GUERRAS Samy Cherif
-\end{tabular}}
-
-\fancyhead[L]{\includegraphics[width=1.5cm]{University_of_Luxembourg_logo_(fr).svg.png}}
+\titlespacing*{\section}{0pt}{2pt}{0.5pt}
+\setlength{\parindent}{0pt}\setlength{\parskip}{1pt}
+\pagestyle{fancy}\fancyhf{}
+\setlength{\headheight}{12pt}\setlength{\footskip}{18pt}
+\fancyhead[L]{\footnotesize University of Luxembourg}
 \fancyhead[C]{\textbf{M2 -- Technology Exploration and Proposal}}
-\fancyhead[R]{\footnotesize Digital Transformation (BPINFOR-131)}
-
-\fancyfoot[L]{\footnotesize\groupnames}
-\fancyfoot[R]{Page \thepage\ of \pageref{LastPage}}
-
-\fancypagestyle{plain}{
-  \fancyhf{}
-  \fancyhead[L]{\includegraphics[width=1.5cm]{University_of_Luxembourg_logo_(fr).svg.png}}
-  \fancyhead[C]{\textbf{M2 -- Technology Exploration and Proposal}}
-  \fancyhead[R]{\footnotesize Digital Transformation (BPINFOR-131)}
-  \fancyfoot[L]{\footnotesize\groupnames}
-  \fancyfoot[R]{Page \thepage\ of \pageref{LastPage}}
-}
-
+\fancyhead[R]{\footnotesize BPINFOR-131}
+\fancyfoot[L]{\footnotesize Guerras Samy Cherif}
+\fancyfoot[R]{\footnotesize Page \thepage\ of \pageref{LastPage}}
+\fancypagestyle{plain}{\fancyhf{}\fancyhead[L]{\footnotesize University of Luxembourg}\fancyhead[C]{\textbf{M2 -- Technology Exploration and Proposal}}\fancyhead[R]{\footnotesize BPINFOR-131}\fancyfoot[L]{\footnotesize Guerras Samy Cherif}\fancyfoot[R]{\footnotesize Page \thepage\ of \pageref{LastPage}}}
 \begin{document}
-\small\sloppy
-\textbf{Team:} Markr \quad \textbf{Lead:} Guerras Samy \quad \textbf{Product:} Markr \quad \textbf{Repo:} \url{https://github.com/Guerrassc/Markr} (tag \texttt{m2}, public)
+\fontsize{8}{9}\selectfont\sloppy
+\textbf{Team:} Markr \quad \textbf{Team lead/member:} Guerras Samy Cherif \quad \textbf{Repository:} \url{https://github.com/Guerrassc/Markr} (public)
 
 \section{Approaches compared}
-Task: turn an assignment brief into a complete checklist of requirements. Same 10 briefs for every approach (\texttt{experiments/m2\_extraction}). Cost uses the price list in section 5.
+Task: turn an assignment brief into a checklist of requirements. All approaches use the synthetic cases in \texttt{experiments/m2\_extraction}.
 \footnotesize
-\begin{tabular}{@{}p{2.9cm}p{3.9cm}p{4.5cm}p{4.5cm}@{}}
+\begin{tabular}{@{}p{2.55cm}p{4.1cm}p{4.25cm}p{4.25cm}@{}}
 \toprule
- & \textbf{A: regex rules (baseline)} & \textbf{B: small LLM} (gemini-3.5-flash-lite) & \textbf{C: large LLM} (gemini-3.8-flash) \\
+ & \textbf{A: regex baseline} & \textbf{B: small LLM} & \textbf{C: larger LLM}\\
 \midrule
-Output quality (recall) & 50\,\% (measured) & \todo{from results} & \todo{from results} \\
-Cost per user action & \texttt{\texteuro{}}0 & $\approx$\$0.0033 & $\approx$\$0.0060 \\
-Latency (median / worst) & under 1 ms & \todo{s / s} & \todo{s / s} \\
-Data needed & none & none (prompt only) & none (prompt only) \\
-Failure modes & misses rules without a date or number (Harvard, plain text, ``every member must speak'') & \todo{from failed cases} & \todo{from failed cases} \\
-Lock-in / switching & none & low: prompt in \texttt{prompts/}, plain HTTP client, OpenAI-compatible API & low (same) \\
+Model & No model & \texttt{gemini-3.5-flash-lite} & \texttt{gemini-3.8-flash} (configured candidate; not run)\\
+Recall & 50.3\% mean, 10/10 cases & 100\% mean, 3/10 completed cases & Not measured\\
+Items per brief & 3.7 & 10.7 & Not measured\\
+Latency (median / worst) & 0 s (local) & 31.49 / 186.34 s & Not measured\\
+Estimated cost per action & \$0 & about \$0.00327 & about \$0.00604\\
+Data needed & None & Brief text + prompt & Brief text + prompt\\
+Failure modes & Misses rules expressed without dates/numbers and some plain-language constraints & 7 requests did not complete; latency is high; extraction can still hallucinate & Not tested\\
+Switching effort & None & Low: prompt and provider client are replaceable & Low: same client interface\\
 \bottomrule
 \end{tabular}
-\small
+\scriptsize
 
-\section{Experiment}
-\texttt{experiments/m2\_extraction} runs all three approaches on 10 synthetic briefs (essay, lab, code, rubric, French, informal email, \dots) with labelled requirements. Metric: recall (a requirement counts as found when one extracted line contains all its key words). How to run: that folder's README; raw output: \texttt{results/m2\_results.md}.\\
-\textbf{Result:} regex baseline 50\,\% mean recall at 3.7 items per brief (best: thesis 71\,\%, worst: essay 29\,\%). LLM rows: \todo{paste table}. \textbf{Commentary:} \todo{what the LLMs found that rules missed; two or three concrete missed items; any failures}.
+\section{Experiment and results}
+The script compares regex, small-LLM and large-LLM extraction on 10 synthetic briefs (essay, lab, Haskell, presentation, reflection, French, rubric, email, problem set, thesis). Metric: requirement recall; a labelled requirement counts when one extracted line contains all annotated key strings. Run: \texttt{python experiments/m2\_extraction/run\_experiment.py}; instructions and raw JSON are in the repository.
 
-\section{Chosen approach, limitations, switch trigger}
-\textbf{Chosen:} \todo{gemini-3.8-flash or gemini-3.5-flash-lite} through Google\'s Gemini API, prompt kept in the repo, \todo{reason from the results}. \textbf{Limitations:} (1) only 10 synthetic briefs and keyword matching, so recall is optimistic and can miss correct paraphrases; (2) briefs and drafts are student work sent to Google, and on the free tier Google may use content to improve its products, so testing uses only synthetic briefs and real use needs the paid tier; (3) scanned or oddly laid-out PDFs need text extraction first and may lose rules. \textbf{We would switch} to the small model if its recall is within 5 points of the large one, and to another provider if rate limits or terms block the MVP demo.
-
+\textbf{Results.} Regex: 50.3\% mean recall, 10/10 cases, 3.7 items/brief. Small LLM: 100\% recall on 3/10 completed cases (20 labelled requirements), 10.7 items/brief, 31.49 s median / 186.34 s worst. On those same three cases, regex averaged 45.3\%. Seven LLM calls did not complete; large model was not run. Example regex misses (essay): PDF format, Harvard referencing, six-source minimum, title page and late penalty. Evidence is preliminary: synthetic briefs, small sample, imperfect keyword scoring.
+\section{Chosen approach, limitations and switch trigger}
+\textbf{Choice:} provisionally use \texttt{gemini-3.5-flash-lite}: full recall on the 3 completed cases and lower estimated cost than the larger candidate. Not conclusive: only 3/10 calls completed and worst latency exceeded 3 minutes. \textbf{Limitations:} (1) synthetic briefs and imperfect keyword metric; (2) free-tier availability/latency; (3) student brief/draft data leaves Markr, so check provider terms, retention and consent before real use. Scanned-PDF OCR is untested. \textbf{Switch if:} recall below 90\% on at least 20 varied cases, over 10\% failures after retries, unacceptable latency, or unsuitable privacy terms. Evaluate a paid tier, alternative provider or local model; the large model has not been shown to perform better.
 \section{First architecture sketch}
-Student $\rightarrow$ web UI (brief + draft) $\rightarrow$ Markr backend $\rightarrow$ \textbf{LLM API} (Google Gemini API, \todo{model}) $\rightarrow$ checklist and check result $\rightarrow$ UI. Prompt: \texttt{prompts/extract\_requirements.txt}. The API key lives in a git-ignored \texttt{.env}. Brief and draft text leave our system for the API provider. Mermaid sketch: \texttt{docs/architecture.md}.
-
+Student + brief/draft $\rightarrow$ Markr UI/backend (PDF text extraction; prompt in \texttt{prompts/}) $\rightarrow$ \textbf{Google Gemini API, \texttt{gemini-3.5-flash-lite}} $\rightarrow$ editable checklist $\rightarrow$ draft comparison $\rightarrow$ met/missing/uncertain results. Brief/draft text leaves Markr for Google. API key is stored in local git-ignored \texttt{.env}; only placeholders are committed. This is the M2 proposal, not a claim that the complete product exists.
 \section{First cost estimate}
-Google Gemini API price list, paid tier, checked 19 Oct 2026 (ai.google.dev/gemini-api/docs/pricing), per 1M tokens: gemini-3.8-flash \$0.75 input and \$3.75 output (rising to \$1.50 and \$7.50 on 1 Jan 2027); gemini-3.5-flash-lite \$0.30 and \$2.50. Output includes thinking tokens. One action = extract the checklist from one brief and check one draft. Assumption: 3,800 input and 850 output tokens (brief about 700 tokens, draft about 2,800, prompts and checklist the rest); \todo{replace with measured tokens from \texttt{results/m2\_results.json}}.\\
-Large: (3,800 $\times$ 0.75 + 850 $\times$ 3.75) / 1,000,000 = 0.00285 + 0.00319 = \textbf{\$0.00604} per action. Small: (3,800 $\times$ 0.30 + 850 $\times$ 2.50) / 1,000,000 = 0.00114 + 0.00213 = \$0.00327. At 3,000 actions per month: about \$18.11 (large) or \$9.80 (small); after the 1 Jan 2027 price rise the large model costs about \$0.0121 per action.
+Google Gemini API paid-tier price assumptions recorded 19 Oct 2026: \texttt{gemini-3.5-flash-lite} \$0.30/1M input, \$2.50/1M output; \texttt{gemini-3.8-flash} \$0.75/1M input, \$3.75/1M output. Source: \url{https://ai.google.dev/gemini-api/docs/pricing}; verify current price/model availability before deployment. Small-model experiment total: 591 input / 430 output tokens across 3 successful calls = about 197 / 143 per extraction; measured extraction cost is $(197\times0.30+143\times2.50)/10^6=\$0.00042$ per brief.
 
-\section{Plan to MVP (due Mon 16 Nov)}
+End-to-end estimate (not measured): 3,800 input + 850 output tokens per brief-and-draft action. Small: $\$0.00327/action$, or $\$9.80/month$ at 3,000 actions. Large: $\$0.00604/action$, or $\$18.11/month$. Excludes hosting/storage/tax; development calls used free tier.
+\section{Plan to MVP (due Monday 16 November 2026)}
 \footnotesize
-\begin{tabular}{@{}p{1.5cm}p{8.2cm}p{1.2cm}p{4.2cm}@{}}
+\begin{tabular}{@{}p{1.8cm}p{8.0cm}p{1.45cm}p{3.9cm}@{}}
 \toprule
-\textbf{Date} & \textbf{Task} & \textbf{Owner} & \textbf{Done when} \\
+\textbf{Date} & \textbf{Task} & \textbf{Owner} & \textbf{Done when}\\
 \midrule
-20 Oct & Run all 3 approaches, pick the model, commit results & Samy & table in \texttt{results/} \\
-24--28 Oct & PDF/text upload with text extraction; checklist extraction end to end with the chosen model & Samy & 5 sample briefs, no mocked responses \\
-1--5 Nov & Draft-versus-checklist check; simple web UI joining both steps & Samy & full flow in a browser \\
-9 Nov & Test on 5 real briefs (with consent); log bugs & Samy & 3+ bugs listed \\
-12--14 Nov & README setup in 5 steps, architecture diagram, run on another laptop, 3-minute demo video & Samy & clean machine works; unlisted video link \\
+20--22 Oct & Re-run/extend model comparison; document failures and final model decision & Samy & Reproducible results and updated table\\
+23--28 Oct & PDF/text upload and text extraction; connect chosen model end to end & Samy & 5 sample briefs processed without mocked responses\\
+29 Oct--5 Nov & Draft-versus-checklist comparison and simple browser UI & Samy & Full upload-to-result flow works\\
+6--9 Nov & Test with real briefs only with informed consent; record bugs and failure cases & Samy & Test notes and at least 3 known issues\\
+10--13 Nov & Update README, architecture, \texttt{.env.example}; test on another laptop & Samy & Setup in 5 steps or fewer on a clean machine\\
+14--15 Nov & Record 3-minute demo; prepare one-page M3 summary and submit & Samy & Video link, bug list and tagged submission\\
 \bottomrule
 \end{tabular}
-\small
-Repository created, README skeleton in place, public (no need to add the lecturers).
 
+\vfill\textit{M2 status: required artefacts are present; LLM evidence is partial (3/10 calls completed), and the larger model is untested.}
 \end{document}

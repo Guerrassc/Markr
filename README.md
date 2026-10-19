@@ -13,18 +13,18 @@ For university students juggling several assignments who lose marks to missed re
 Experiment only for now: see `experiments/m2_extraction/README.md` (4 steps).
 
 ## 4. Architecture
-*TODO: diagram (draw.io/Excalidraw/Mermaid, exported to `docs/`) + at most 150 words. First hand-drawn sketch for M2 goes in `docs/`.*
+M2 proposal: see [`docs/architecture.md`](docs/architecture.md) for the initial Mermaid data-flow sketch. It is a proposal, not yet the final architecture of a running product; update it for M3.*
 
 ## 5. AI components
 - Prompt: `prompts/extract_requirements.txt`
-- Models compared in M2: see `results/m2_results.md` and `.env.example`
+- M2 candidate models: `gemini-3.5-flash-lite` (small; 3/10 calls completed) and `gemini-3.8-flash` (larger; not run). See `results/m2_results.md` and `.env.example`.
 - Data: 10 synthetic briefs in `experiments/m2_extraction/cases.json` (written for this project)
 
 ## 6. Evaluation
-Method, results and failure cases: *TODO (M4: at least 20 cases or 5 test users, before/after table, 3 verbatim failure cases).* M2 results: `results/m2_results.md`.
+M2 preliminary extraction experiment: `results/m2_results.md`. M4 evaluation is still TODO and must include at least 20 cases or 5 test users, before/after results and three verbatim failure cases.
 
 ## 7. Limitations, risks, privacy and ethics
-*TODO (at most 250 words in the final package).* Starting points: briefs and drafts are student work (do not send to third-party AI without consent; check providers' training terms); the tool must check, not write, assignments; extraction can miss implied rules.
+*TODO for final package (at most 250 words). Starting points: briefs and drafts are student work (do not send to third-party AI without consent; check providers' training terms); the tool must check, not write, assignments; extraction can miss implied rules.
 
 ## 8. Business case
 *TODO (see course brief section 6).*

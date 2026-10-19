@@ -18,10 +18,14 @@
 
 ## M2 - Technology exploration and proposal (due 2026-10-19)
 
-- [x] Repository created, README skeleton in place (public)
-- [x] Regex baseline measured: 50% mean recall, 3.7 items per brief (`experiments/m2_extraction`)
-- [ ] LLM approaches run, results in `results/m2_results.md`
-- [ ] Chosen approach, 3 limitations, switch trigger (in the M2 PDF)
-- [x] First architecture sketch: `docs/architecture.md`
-- [ ] Cost estimate with measured tokens (Groq price list checked 2026-10-19)
-- [ ] Plan to MVP (in the M2 PDF)
+- [x] Repository created; README skeleton in place; public repository
+- [x] Two candidate approaches described (regex baseline and LLM; larger LLM listed as an untested candidate)
+- [x] Experiment script, instructions and result committed in `experiments/m2_extraction/` and `results/`
+- [x] Regex baseline: 50.3% mean recall over 10 synthetic cases
+- [x] Small LLM: 100% recall on the 3 completed cases (20 labelled requirements); 7/10 calls did not complete. On the same three cases, regex recall averaged 45.3%
+- [x] Chosen provisional approach, three limitations and switch triggers documented in `docs/M2_filled.tex`
+- [x] Initial architecture sketch in `docs/architecture.md`
+- [x] Cost estimate documented, separating measured extraction tokens from assumed end-to-end tokens
+- [x] MVP tasks, owner and dates documented in `docs/M2_filled.tex`
+
+**M2 evidence limitation.** The small-model results are partial because only 3 of 10 API requests completed. The larger candidate was not run. The PDF states these limitations explicitly; do not describe the experiment as a completed 10-case LLM comparison. Cost figures use the price assumptions recorded in the M2 write-up and a planning estimate for the draft-checking stage; verify live provider prices before deployment.
