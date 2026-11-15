@@ -15,7 +15,7 @@ The AI suggests the requirements and the verdicts, but plain code checks them. A
 
 ## 2. Users and value proposition
 
-Students who have several assignments at once and are afraid of missing a rule in one of the briefs. Unlike rereading the brief by hand, or pasting it into a general chatbot and hoping, Markr gives a saved checklist and a check against the draft. The interviews are in `PROJECT_LOG.md` (M1).
+Students who have several assignments at once and are afraid of missing a rule in one of the briefs. Unlike rereading the brief by hand, or pasting it into a general chatbot and hoping, Markr gives a saved checklist and a check against the draft. The M1 interview notes are in the M1 report.
 
 ## 3. How to run it
 
