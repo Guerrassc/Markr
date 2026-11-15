@@ -29,7 +29,7 @@ def ask_gemini(system, user, timeout=45, attempts=3):
     body = {
         "systemInstruction": {"parts": [{"text": system}]},
         "contents": [{"role": "user", "parts": [{"text": user}]}],
-        "generationConfig": {"maxOutputTokens": 4000,
+        "generationConfig": {"maxOutputTokens": 4000, "temperature": 0,
                              "responseMimeType": "application/json"},
     }
     last_error = "unknown error"

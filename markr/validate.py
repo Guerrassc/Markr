@@ -44,11 +44,13 @@ def validate_verdicts(verdicts, draft):
         if not isinstance(v, dict):
             continue
         status = v.get("status")
-        evidence = v.get("evidence") or ""
+        evidence = v.get("evidence")
+        if not isinstance(evidence, str):
+            evidence = ""
         note = ""
         if status not in STATUSES:
-            status, note = "uncertain", "The AI gave an invalid status"
+            status, evidence, note = "uncertain", "", "The AI gave an invalid status"
         elif status == "met" and not quote_in(evidence, draft):
-            status, note = "uncertain", "No matching quote found in the draft"
+            status, evidence, note = "uncertain", "", "No matching quote found in the draft"
         checked.append({**v, "status": status, "evidence": evidence, "note": note})
     return checked
