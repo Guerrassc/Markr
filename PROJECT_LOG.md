@@ -1,31 +1,66 @@
-# Project log
+# Markr
 
-## M1 - Problem and customer validation (due 2026-10-12; written 2026-10-19)
+Markr is a small tool for students. You give it an assignment brief and it makes a checklist of what the brief asks for. Then you give it your draft, and for each item on the list it says whether the draft meets it, misses it, or whether it can't tell.
 
-**Problem.** Every assignment comes with a brief mixing deliverables, deadlines, word limits, formatting rules and marking criteria. Students juggling several courses read it once and sometimes discover at the end that a requirement was missed, which can mean lost marks or extra work. One interviewee said missing a small instruction can cost marks; both said checking takes extra time when several assignments overlap. *[TODO: minutes per assignment, lost marks or redone work, from the follow-up question]*
+It only checks. It doesn't write anything for you.
 
-**Users and customers.** Users: university students, mostly bachelor level. Payers: students (free tier plus a small monthly fee); later universities or student services. Segment: University of Luxembourg 7,200+ students (uni.lu Facts & Figures); 35,615 Luxembourg students received state aid in 2024/25 (Paperjam).
+I made it for the Digital Transformation course (BPINFOR-131) at the University of Luxembourg, winter 2026-27.
 
-**Interviews (2026-10-19, ~25 min each, consent to note-taking given).**
-- Interview A, law student in Montreal (graduation expected 2028): gets instructions via online platforms and PDFs; hard to keep track of all deadlines and requirements; missing a small instruction can cost marks; uses personal notes and calendars; checking takes extra time when several assignments are due. *[TODO: follow-up on time spent, lost marks, paid help]*
-- Interview B, law student in Luxembourg (graduation expected 2028): instructions come with different rules and deadlines; easy to forget small details; sometimes rereads instructions to check everything is included; uses notes and reminders; checking takes time and an automatic checklist could help. *[TODO: follow-up on time spent, lost marks, paid help]*
+## 1. What it does
 
-**Alternatives.** Do nothing (reread the brief); own checklist or calendar app (deadlines only, no checking); general chatbot (inconsistent, nothing saved, work goes to a third party).
+1. Upload or paste a brief (PDF or text).
+2. Markr lists the requirements. Under each one it shows the sentence of the brief it came from.
+3. Upload or paste your draft.
+4. Each requirement is marked met, missing or uncertain. For "met" it shows the part of your draft that backs it up.
 
-**Value proposition.** For university students juggling several assignments who lose marks to missed requirements, Markr is an assignment-checklist assistant that turns a brief or rubric into a list of every requirement and checks your draft against it in minutes, unlike rereading the brief by hand.
+The AI suggests the requirements and the verdicts, but plain code checks them. A requirement is dropped if its quote isn't really in the brief. A "met" becomes "uncertain" if its evidence isn't really in the draft. Word and page counts are done by code, never by the AI.
 
-**Why AI.** Briefs have no standard format and many rules are only implied; extracting them and checking a draft needs language understanding that fixed rules cannot provide across layouts.
+## 2. Users
 
-## M2 - Technology exploration and proposal (due 2026-10-19)
+Students who have several assignments at once and are afraid of missing a rule in one of the briefs. The interviews are in `PROJECT_LOG.md`.
 
-- [x] Repository created; README skeleton in place; public repository
-- [x] Two candidate approaches described (regex baseline and LLM; larger LLM listed as an untested candidate)
-- [x] Experiment script, instructions and result committed in `experiments/m2_extraction/` and `results/`
-- [x] Regex baseline: 50.3% mean recall over 10 synthetic cases
-- [x] Small LLM: 100% recall on the 3 completed cases (20 labelled requirements); 7/10 calls did not complete. On the same three cases, regex recall averaged 45.3%
-- [x] Chosen provisional approach, three limitations and switch triggers documented in `docs/M2_filled.tex`
-- [x] Initial architecture sketch in `docs/architecture.md`
-- [x] Cost estimate documented, separating measured extraction tokens from assumed end-to-end tokens
-- [x] MVP tasks, owner and dates documented in `docs/M2_filled.tex`
+## 3. How to run it
 
-**M2 evidence limitation.** The small-model results are partial because only 3 of 10 API requests completed. The larger candidate was not run. The PDF states these limitations explicitly; do not describe the experiment as a completed 10-case LLM comparison. Cost figures use the price assumptions recorded in the M2 write-up and a planning estimate for the draft-checking stage; verify live provider prices before deployment.
+You need Python 3.11 or newer and a Gemini API key.
+
+1. `git clone https://github.com/Guerrassc/Markr.git` and then `cd Markr`
+2. `python -m venv .venv`, then activate it (Windows: `.venv\Scripts\activate`, Mac/Linux: `source .venv/bin/activate`)
+3. `pip install -r requirements.txt`
+4. Copy `.env.example` to `.env` and paste your key after `GEMINI_API_KEY=`
+5. `streamlit run app.py`
+
+The app opens in your browser at `localhost:8501`.
+
+## 4. Architecture
+
+See `docs/architecture.md`.
+
+## 5. AI components
+
+- Model: `gemini-3.5-flash-lite`, set in `.env`.
+- Prompts: `prompts/extract_requirements_v2.txt` and `prompts/check_draft_v1.txt`.
+- If a call fails, Markr waits and tries again up to 3 times (45 second timeout each). If it still fails, you get a message on screen.
+
+## 6. Evaluation
+
+I only have the small M2 experiment so far: `results/m2_results.md`. It used 10 made-up briefs, and only 3 of the 10 model calls finished. A proper test comes in M4.
+
+## 7. Limitations
+
+- The AI can skip requirements. On the essay test brief it first missed the late penalty, and I only found out by comparing with the brief myself.
+- The answers can change a little between runs.
+- Scanned PDFs have no text to read, so they don't work. Paste the text instead.
+- The free Gemini tier can be slow or fail. Markr retries, but it can still fail.
+- Your brief and draft are sent to Google. Only use text you are allowed to share.
+
+## 8. Business case
+
+Not written yet.
+
+## 9. AI tools I used
+
+I used Claude for the M1 and M2 write-ups, the test briefs and the first experiment script. For M3 it suggested the code for the Gemini client, the quote checks and the app, and helped me set up VS Code, git and Python. I typed and ran the code, tested it, and decided what to keep.
+
+## 10. Who did what
+
+I'm working alone, so I did everything else: the interviews, the repository, the experiments, and the tests.
