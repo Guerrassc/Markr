@@ -2,31 +2,53 @@ import html
 
 STATUS_TEXT = {"met": "Met", "missing": "Missing", "uncertain": "Uncertain"}
 
-CSS = """<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap');
-
-:root {
-  --ink: #1c1c1c;
-  --muted: #6b665d;
-  --line: #e3ddd2;
-  --paper: #faf8f4;
-  --accent: #1f2a44;
-  --gold: #b08d4a;
-  --met: #2f6b4f;
-  --missing: #9b3b35;
-  --uncertain: #8a6d1f;
+LIGHT = {
+    "ink": "#1c1c1c", "muted": "#6b665d", "line": "#e3ddd2", "paper": "#faf8f4",
+    "panel": "#f3eee4", "field": "#ffffff", "accent": "#1f2a44", "accent_text": "#ffffff",
+    "gold": "#b08d4a", "met": "#2f6b4f", "missing": "#9b3b35", "uncertain": "#8a6d1f",
+}
+DARK = {
+    "ink": "#ece8df", "muted": "#a39e93", "line": "#34312c", "paper": "#141413",
+    "panel": "#1d1c1a", "field": "#1d1c1a", "accent": "#ece8df", "accent_text": "#141413",
+    "gold": "#c8a96e", "met": "#6fbf9a", "missing": "#e0847d", "uncertain": "#d4b05a",
 }
 
-.stApp { background: var(--paper); color: var(--ink); font-family: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif; }
+FONTS = "@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap');"
+
+STATIC = """
+html, body, [data-testid="stAppViewContainer"] { background: var(--paper) !important; }
+.stApp { background: var(--paper) !important; color: var(--ink) !important; font-family: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif; }
 header[data-testid="stHeader"] { background: transparent; }
+[data-testid="stStatusWidget"] { color: var(--muted); }
 .block-container { max-width: 760px; padding-top: 3.5rem; padding-bottom: 5rem; }
 .stApp textarea, .stApp button, .stApp input { font-family: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif !important; }
+
+[data-testid="stWidgetLabel"] p { color: var(--ink); font-weight: 500; }
+[data-testid="stTextArea"] [data-baseweb="textarea"], [data-testid="stTextArea"] [data-baseweb="base-input"] { background: var(--field); border-radius: 2px; }
+[data-testid="stTextArea"] [data-baseweb="textarea"] { border: 1px solid var(--line); }
+[data-testid="stTextArea"] textarea { background: var(--field); color: var(--ink); -webkit-text-fill-color: var(--ink); }
+[data-testid="stFileUploaderDropzone"] { background: var(--field); border: 1px dashed var(--line); border-radius: 2px; }
+[data-testid="stFileUploaderDropzone"] span, [data-testid="stFileUploaderDropzone"] small { color: var(--muted); }
+[data-testid="stFileUploaderFileName"] { color: var(--ink); }
+[data-testid="stSpinner"], [data-testid="stSpinner"] p, [data-testid="stSpinner"] div { color: var(--muted); }
+[data-testid="stAlert"] { background: var(--panel); border: 1px solid var(--missing); border-radius: 2px; }
+[data-testid="stAlert"] p { color: var(--ink); }
+
 .stButton > button { border-radius: 2px; font-weight: 500; padding: 0.55rem 1.5rem; }
+[data-testid="stBaseButton-primary"] { background: var(--accent) !important; border: 1px solid var(--accent) !important; }
+[data-testid="stBaseButton-primary"] p { color: var(--accent-text) !important; }
+[data-testid="stBaseButton-primary"]:hover { opacity: 0.88; }
+[data-testid="stBaseButton-secondary"] { background: transparent !important; border: 1px solid var(--line) !important; }
+[data-testid="stBaseButton-secondary"] p { color: var(--ink) !important; }
+[data-testid="stBaseButton-secondary"]:hover { border-color: var(--gold) !important; }
+
+.st-key-theme_toggle { position: fixed; top: 0.8rem; right: 1.2rem; z-index: 1000; width: auto !important; }
+.st-key-theme_toggle .stButton > button { padding: 0.3rem 0.9rem; font-size: 0.82rem; }
 
 .mk-brand { font-family: 'Source Serif 4', Georgia, serif; font-size: 3.2rem; font-weight: 600; letter-spacing: -0.03em; line-height: 1.05; color: var(--ink); }
 .mk-brand::after { content: ""; display: block; width: 48px; height: 3px; background: var(--gold); margin-top: 0.9rem; }
 .mk-tagline { color: var(--muted); font-size: 1.05rem; margin: 1.1rem 0 1.6rem; line-height: 1.5; }
-.mk-note { border-left: 3px solid var(--gold); background: #f3eee4; padding: 0.85rem 1.1rem; color: var(--muted); font-size: 0.88rem; line-height: 1.55; margin-bottom: 3rem; }
+.mk-note { border-left: 3px solid var(--gold); background: var(--panel); padding: 0.85rem 1.1rem; color: var(--muted); font-size: 0.88rem; line-height: 1.55; margin-bottom: 3rem; }
 
 .mk-eyebrow { text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.72rem; font-weight: 600; color: var(--muted); margin-top: 2.5rem; }
 .mk-h2 { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.7rem; font-weight: 600; letter-spacing: -0.01em; margin: 0.2rem 0 1rem; color: var(--ink); }
@@ -49,7 +71,15 @@ header[data-testid="stHeader"] { background: transparent; }
 .mk-met { color: var(--met); }
 .mk-missing { color: var(--missing); }
 .mk-uncertain { color: var(--uncertain); }
-</style>"""
+"""
+
+
+def build_css(dark=False):
+    colors = DARK if dark else LIGHT
+    variables = "".join(f"--{k.replace('_', '-')}: {v};" for k, v in colors.items())
+    scheme = "dark" if dark else "light"
+    root = ":root {" + variables + f"color-scheme: {scheme};" + "}"
+    return "<style>" + FONTS + root + STATIC + "</style>"
 
 
 def esc(text):

@@ -5,11 +5,24 @@ from markr.check import check_draft
 from markr.extract import extract_requirements
 from markr.llm import LLMUnavailable
 from markr.pdf_text import read_pdf
-from markr.theme import CSS, requirement_row, section, stats_html
+from markr.theme import build_css, requirement_row, section, stats_html
 from markr.validate import word_count
 
 st.set_page_config(page_title="Markr", layout="centered")
-st.markdown(CSS, unsafe_allow_html=True)
+
+if "dark" not in st.session_state:
+    st.session_state["dark"] = False
+
+
+def flip_theme():
+    st.session_state["dark"] = not st.session_state["dark"]
+
+
+with st.container(key="theme_toggle"):
+    st.button("Light mode" if st.session_state["dark"] else "Dark mode",
+              key="theme_btn", on_click=flip_theme)
+
+st.markdown(build_css(st.session_state["dark"]), unsafe_allow_html=True)
 
 
 def get_text(uploaded, pasted):
