@@ -5,9 +5,11 @@ from markr.check import check_draft
 from markr.extract import extract_requirements
 from markr.llm import LLMUnavailable
 from markr.pdf_text import read_pdf
+from markr.theme import CSS, requirement_row, section, stats_html
 from markr.validate import word_count
 
-LABELS = {"met": "✅ Met", "missing": "❌ Missing", "uncertain": "❓ Uncertain"}
+st.set_page_config(page_title="Markr", layout="centered")
+st.markdown(CSS, unsafe_allow_html=True)
 
 
 def get_text(uploaded, pasted):
@@ -33,16 +35,19 @@ def run_ai(fn, *args):
     return None
 
 
-st.set_page_config(page_title="Markr")
-st.title("Markr")
-st.caption("Makes a checklist from an assignment brief and checks your draft against it. It never writes your work.")
-st.warning("Your brief and draft are sent to Google Gemini. Only upload text you are allowed to share.")
+st.markdown(
+    '<div class="mk-brand">Markr</div>'
+    '<div class="mk-tagline">Turn an assignment brief into a checklist, then check your draft against it.</div>'
+    '<div class="mk-note">Your brief and draft are sent to Google Gemini for analysis. '
+    "Only upload text you are allowed to share. Markr checks your work, it never writes it.</div>",
+    unsafe_allow_html=True,
+)
 
-st.header("1. Assignment brief")
+st.markdown(section("01", "Assignment brief"), unsafe_allow_html=True)
 brief_file = st.file_uploader("Brief (PDF or TXT)", type=["pdf", "txt"], key="brief_file")
 brief_paste = st.text_area("Or paste the brief text", height=150)
 
-if st.button("Extract requirements"):
+if st.button("Extract requirements", type="primary"):
     brief_text, _ = get_text(brief_file, brief_paste)
     if not brief_text.strip():
         st.error("No text found. Scanned PDFs are not supported, paste the text instead.")
@@ -58,18 +63,21 @@ if st.button("Extract requirements"):
 
 requirements = st.session_state.get("requirements")
 if requirements:
-    st.subheader("Checklist")
-    if st.session_state.get("dropped"):
-        st.caption(f"{st.session_state['dropped']} requirement(s) were dropped because their quote is not in the brief.")
-    for r in requirements:
-        st.markdown(f"- **{r['requirement']}**")
-        st.caption(f"From the brief: “{r['source_quote']}”")
+    st.markdown(f'<div class="mk-sub">Checklist, {len(requirements)} requirements</div>', unsafe_allow_html=True)
+    dropped = st.session_state.get("dropped")
+    if dropped:
+        st.markdown(
+            f'<div class="mk-small">{dropped} proposed requirement(s) were removed because their quote was not found in the brief.</div>',
+            unsafe_allow_html=True,
+        )
+    rows = "".join(requirement_row(r) for r in requirements)
+    st.markdown(f'<div class="mk-list">{rows}</div>', unsafe_allow_html=True)
 
-    st.header("2. Your draft")
+    st.markdown(section("02", "Your draft"), unsafe_allow_html=True)
     draft_file = st.file_uploader("Draft (PDF or TXT)", type=["pdf", "txt"], key="draft_file")
     draft_paste = st.text_area("Or paste your draft", height=150)
 
-    if st.button("Check my draft"):
+    if st.button("Check my draft", type="primary"):
         draft_text, pages = get_text(draft_file, draft_paste)
         if not draft_text.strip():
             st.error("No text found in the draft. Scanned PDFs are not supported, paste the text instead.")
@@ -80,13 +88,12 @@ if requirements:
                 st.session_state["counts"] = (word_count(draft_text), pages)
 
 if st.session_state.get("results"):
+    results = st.session_state["results"]
     words, pages = st.session_state["counts"]
-    st.header("Result")
-    st.info(f"Words: {words}" + (f" | Pages: {pages}" if pages else ""))
-    for r in st.session_state["results"]:
-        st.markdown(f"**{LABELS[r['status']]}** - {r['requirement']}")
-        st.caption(f"Brief: “{r['source_quote']}”")
-        if r["evidence"]:
-            st.caption(f"Evidence in your draft: “{r['evidence']}”")
-        if r["note"]:
-            st.caption(r["note"])
+    counts = {s: sum(1 for r in results if r["status"] == s) for s in ("met", "missing", "uncertain")}
+    st.markdown(section("03", "Results"), unsafe_allow_html=True)
+    st.markdown(stats_html(words, pages, counts), unsafe_allow_html=True)
+    rows = "".join(
+        requirement_row(r, status=r["status"], evidence=r["evidence"], note=r["note"]) for r in results
+    )
+    st.markdown(f'<div class="mk-list">{rows}</div>', unsafe_allow_html=True)
